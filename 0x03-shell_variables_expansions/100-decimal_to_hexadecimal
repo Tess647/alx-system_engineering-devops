@@ -1,2 +1,2 @@
 #!/bin/bash
-hex_value=$(printf "%X" "$decimal_value")
+printf '%x\n' $DECIMAL
