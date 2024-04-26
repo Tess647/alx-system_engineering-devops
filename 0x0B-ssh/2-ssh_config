@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
-# This script configure SSH configuration file to our needs
-PasswordAuthentication no
-IdentityFile ~/.ssh/school
+# This script configures the SSH client configuration file to our needs
+
+# Define the SSH configuration file path
+ssh_config_file=~/.ssh/config
+
+# Ensure the SSH configuration file exists, if not, create it
+touch "$ssh_config_file"
+
+# Append the necessary configuration to the SSH configuration file
+echo "Host your_server_alias_or_IP" >> "$ssh_config_file"
+echo "    PasswordAuthentication no" >> "$ssh_config_file"
+echo "    IdentityFile ~/.ssh/school" >> "$ssh_config_file"
+
+echo "SSH client configuration updated successfully."
