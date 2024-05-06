@@ -3,24 +3,15 @@
 #+    Enables management via the init script.
 #+    Distributes requests using a round-robin algorithm.
 
-set -e
-
-# Update package repositories and upgrade existing packages
 apt-get -y update
 apt-get -y upgrade
-
-# Install HAProxy
 apt-get -y install haproxy
 
-# Enable HAProxy management via init script
 echo "ENABLED=1" >> /etc/default/haproxy
-
-# Backup the original HAProxy configuration file
 mv /etc/haproxy/haproxy.cfg{,.original}
+touch /etc/haproxy/haproxy.cfg
 
-# Define the template for HAProxy configuration
-cat <<EOF > /etc/haproxy/haproxy.cfg
-global
+printf %s "global
     log 127.0.0.1 local0 notice
     maxconn 2000
     user haproxy
@@ -36,16 +27,15 @@ defaults
     timeout client  10000
     timeout server  10000
 listen hbnb
-    bind 3.84.239.19:80
+    bind 3.84.239.19
     mode http
     stats enable
     stats uri /haproxy?stats
     balance roundrobin
     option httpclose
     option forwardfor
-    server 500126-web-01 54.210.196.197:80 check
-    server 500126-web-02 100.25.144.162:80 check
-EOF
+    server 500126-web-01-54.210.196.197 check
+    server 500126-web-02-100.25.144.162 check
+" >> /etc/haproxy/haproxy.cfg
 
-# Restart HAProxy using systemctl
-systemctl restart haproxy
+sudo service haproxy start
