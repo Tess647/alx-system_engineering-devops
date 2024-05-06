@@ -3,13 +3,13 @@
 #+    Enables management via the init script.
 #+    Distributes requests using a round-robin algorithm.
 
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y install haproxy
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install haproxy
 
 echo "ENABLED=1" >> /etc/default/haproxy
-sudo mv /etc/haproxy/haproxy.cfg{,.original}
-sudo touch /etc/haproxy/haproxy.cfg
+mv /etc/haproxy/haproxy.cfg{,.original}
+touch /etc/haproxy/haproxy.cfg
 
 printf %s "global
     log 127.0.0.1 local0 notice
