@@ -1,4 +1,4 @@
-ncreases the amount of traffic an Nginx server can handle.
+#Increases the amount of traffic an Nginx server can handle.
 
 # Increase the ULIMIT of the default file
 exec { 'fix--for-nginx':
@@ -11,3 +11,4 @@ exec { 'nginx-restart':
   command => 'nginx restart',
   path    => '/etc/init.d/'
 }
+
